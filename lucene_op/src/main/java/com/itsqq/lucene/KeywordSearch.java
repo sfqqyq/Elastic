@@ -1,6 +1,5 @@
 package com.itsqq.lucene;
 
-import jdk.nashorn.internal.ir.CallNode;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.Term;
@@ -26,8 +25,12 @@ public class KeywordSearch {
         // 用来搜索关键字的
         IndexSearcher indexSearcher = new IndexSearcher(reader);
 
-        // 3、构建词条（Term）和词条查询（TermQuery）
-        TermQuery termQuery = new TermQuery(new Term("content", "跳"));
+        // 3、构建词条（Term）和词条查询（TermQuery）（如果不使用分词器只能查询一个字，词语查不了）
+//        TermQuery termQuery = new TermQuery(new Term("content", "跳"));
+        // 3、使用IK分词器后可以使用词语查询
+        TermQuery termQuery = new TermQuery(new Term("content", "人生"));
+        // 3、使用句子
+//        TermQuery termQuery = new TermQuery(new Term("content", "人生是一条河"));
 
         // 4、执行查询，获取文档
         TopDocs topDocs = indexSearcher.search(termQuery, 50);

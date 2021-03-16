@@ -9,6 +9,7 @@ import org.apache.lucene.document.TextField;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.store.FSDirectory;
+import org.wltea.analyzer.lucene.IKAnalyzer;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,7 +21,9 @@ import java.nio.file.Paths;
 public class BuildArticleIndex {
     public static void main(String[] args) throws IOException {
         // 1、构建分词器（StandardAnalyzer）
-        StandardAnalyzer standardAnalyzer = new StandardAnalyzer();
+//        StandardAnalyzer standardAnalyzer = new StandardAnalyzer();
+        // 1、使用IKA分词器
+        IKAnalyzer standardAnalyzer = new IKAnalyzer();
         // 2、构建文档写入器配置（IndexWriterConfig）
         IndexWriterConfig indexWriterConfig = new IndexWriterConfig(standardAnalyzer);
         // 3、创建文档写入器(IndexWriter,注意：需要使用Paths来)
